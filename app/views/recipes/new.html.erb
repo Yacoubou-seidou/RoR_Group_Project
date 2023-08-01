@@ -1,0 +1,43 @@
+<div class="col-lg-6 mx-lg-auto">
+  <div class="card shadow">
+    <div class="card-header">
+      <h2 class="card-title text-center">Create Food</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with model: @recipe, url: user_recipes_path(@user, @recipe), method: :post do |f| %>
+
+        <div class="form-group mb-2">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="form-group mb-2">
+              <%= f.label :preparation_time, class: "form-label" %><br />
+        <%= f.text_field :preparation_time, autofocus: true,placeholder: '2min', autocomplete: "preparation_time" ,
+          class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="form-group mb-2">
+              <%= f.label :cooking_time, class: "form-label" %><br />
+        <%= f.text_field :cooking_time, autofocus: true, autocomplete: "cooking_time" , placeholder: '2min', class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="form-group mb-2">
+              <%= f.label :description, class: "form-label" %><br />
+        <%= f.text_area :description, autofocus: true, autocomplete: "description", placeholder: 'text' , class: "form-control form-control-lg" %>
+        </div>
+        <div class="form-group mb-2">
+      <%= f.radio_button :public, true %>
+        <%= f.label 'Public' , :public=> 'True' %>
+
+          <%= f.radio_button :public, false %>
+            <%= f.label 'Private' , :public=> 'False' %>
+        </div>
+
+        <div class="actions text-center m-4">
+        <%= f.submit "Add recipe" , class: "btn btn-lg btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+
+  <div class="wrapper">
+    <h1>Recipe <%= @recipe.name %>
+    </h1>
+    <div class="recipe-container">
+      <div>
+        <h4>Preparation Time: <%= @recipe.preparation_time %>
+        </h4>
+        <h4>Cooking Time: <%= @recipe.cooking_time %>
+        </h4>
+        <br>
+        <h5>Description: <br><%= @recipe.description %></h5>
+      </div>
+      <div>
+        <% if @recipe.public %>
+          <span class="badge text-bg-warning p-2 px-4">Public</span>
+          <% else %>
+            <span class="badge text-bg-secondary p-2 px-4">Private</span>
+            <% end %>
+      </div>
+    </div>
+  </div>
