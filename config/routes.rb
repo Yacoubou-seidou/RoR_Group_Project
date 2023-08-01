@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'recipes/index'
+  get 'recipes/show'
+  get 'recipes/new'
+  get 'recipes/create'
+  get 'recipes/destroy'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     confirmations: 'users/confirmations',
@@ -11,4 +16,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'foods#index'
   resources :foods, except: [:update]
+  resources :users do
+    resources :recipes# or other necessary actions
+  end
 end
