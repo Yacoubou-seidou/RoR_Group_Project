@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
   }
   get '/public_recipes', to: 'recipes#public_recipes'
+  get '/general_shopping_list', to: 'foods#general_shopping_list'
   # Define the root path route ("/")
   root 'foods#index'
 

@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: %i[show edit update destroy]
   def index
     @recipes = Recipe.includes([:user]).where(user_id: current_user.id).order(created_at: :desc)
   end
@@ -14,6 +15,19 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.includes(:user, recipe_foods: :food).find(params[:id])
+  end
+
+  def shopping_list
+    @total_value = 0
+    recipe = Recipe.find(params[:recipe_id])
+    @recipe_foods = recipe.recipe_foods.includes(:food).select do |recipe_food|
+      food = recipe_food.food
+      user_food = current_user.foods.find_by(name: food.name, measurement_unit: food.measurement_unit)
+      @total_value += recipe_food.process_cost(user_food)
+      recipe_food.process_quantity(user_food).positive?
+    end
+    @total_value = @total_value.round(2)
+    @items_to_buy = @recipe_foods.count
   end
 
   def destroy
@@ -47,6 +61,10 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
   def recipe_params
     params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
