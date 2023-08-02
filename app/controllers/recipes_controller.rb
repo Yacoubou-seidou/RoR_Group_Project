@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.includes([:user]).find(params[:id])
+    @recipe = Recipe.includes(:user, recipe_foods: :food).find(params[:id])
   end
 
   def destroy
@@ -29,6 +29,16 @@ class RecipesController < ApplicationController
       redirect_to user_recipes_path
     else
       render 'show'
+    end
+  end
+
+  def toggle_public
+    @recipe = Recipe.find(params[:id])
+    if @recipe.user == current_user
+      @recipe.toggle!(:public)
+      respond_to(&:js)
+    else
+      redirect_to @recipe, alert: 'You do not have permission to perform this action.'
     end
   end
 

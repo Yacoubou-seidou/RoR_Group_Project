@@ -1,5 +1,15 @@
-<h1><%= @food.name %></h1>
-<p>Measurement Unit: <%= @food.measurement_unit %></p>
-<p>Price: <%= number_to_currency(@food.price) %></p>
-<p>Quantity: <%= @food.quantity %></p>
-<%= link_to 'Back to Food List', foods_path %>
+
+<div class="d-flex justify-content-center">
+ <div class="card shadow d-flex justify-content-center" style="width: 30rem;">
+  <div class="card-header">
+    <h2 class="card-title text-center">Food Deatails</h2>
+  </div>
+  <div class="card-body d-flex flex-column align-items-center dark-card">
+    <h5 class="card-title m-3">Name: <%= @food.name %></h5>
+    <h5 class="card-subtitle   m-3">Measurement Unit: <%= @food.measurement_unit %></h5>
+    <h5 class="card-text m-3">Quantity: <%= @food.quantity %></h5>
+    <h5 class="card-text m-3">Price: <%= @food.price %></h5>
+    <%= link_to 'Back to Food List', foods_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+</div>
