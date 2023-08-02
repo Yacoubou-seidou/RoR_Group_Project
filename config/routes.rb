@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     passwords: 'users/passwords',
   }
-
+  get '/public_recipes', to: 'recipes#public_recipes'
   # Define the root path route ("/")
   root 'foods#index'
 
