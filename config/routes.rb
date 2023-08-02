@@ -1,22 +1,28 @@
 Rails.application.routes.draw do
-  get 'recipes/index'
-  get 'recipes/show'
-  get 'recipes/new'
-  get 'recipes/create'
-  get 'recipes/destroy'
+  # Define your Devise routes for users
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     confirmations: 'users/confirmations',
     registrations: 'users/registrations',
     passwords: 'users/passwords',
   }
-  # get 'foods/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
+  # Define the root path route ("/")
   root 'foods#index'
+
+  # Define resources for Foods, except for 'update'
   resources :foods, except: [:update]
+
+  # Define nested resources for Users and Recipes
   resources :users do
-    resources :recipes# or other necessary actions
+    resources :recipes do
+      patch :toggle_public, on: :member
+      resources :recipe_foods, only: [:new, :create]
+    end
+  end
+
+  # Define nested resources for Recipes and RecipeFoods
+  resources :recipes, only: [:show] do
+    resources :recipe_foods, only: [:new, :create, :destroy]
   end
 end

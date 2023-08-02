@@ -1,6 +1,5 @@
 <div class="container">
   <h1>Food List</h1>
-
   <% if @foods.any? %>
     <table class="table table-dark table-striped">
       <thead>
@@ -13,10 +12,9 @@
         </tr>
       </thead>
       <tbody>
-
        <% @foods.each do |food| %>
            <tr>
-              <td><%= link_to food.name, food_path(food) %></td>
+              <td><%= link_to food.name.capitalize, food_path(food), class:'text-white'%></td>
               <td><%= food.measurement_unit %></td>
               <td><%= number_to_currency(food.price) %></td>
               <td><%= food.quantity %></td>
@@ -25,7 +23,6 @@
               </td>
             </tr>
        <% end %>
-
       </tbody>
     </table>
   <% else %>
@@ -34,5 +31,4 @@
    <div class='text-center'>
       <%= link_to  'Add New Food', new_food_path, class: 'btn btn-info' %>
    </div>
-
 </div>
