@@ -7,7 +7,8 @@ class RecipeFoodsController < ApplicationController
   end
 
   def create
-    @recipe_food = @recipe.recipe_foods.build(recipe_food_params)
+    @recipe_food = RecipeFood.new(recipe_food_params)
+    @recipe_food.recipe = @recipe
     if @recipe_food.save
       redirect_to recipe_path(@recipe), notice: 'Food item added to the recipe.'
     else
@@ -22,6 +23,6 @@ class RecipeFoodsController < ApplicationController
   end
 
   def recipe_food_params
-    params.require(:recipe_food).permit(:food_id)
+    params.require(:recipe_food).permit(:quantity, :food_id)
   end
 end
