@@ -1,3 +1,4 @@
+require 'rails_helper'
 RSpec.describe 'PublicRecipes', type: :request do
   describe 'GET /public_recipes' do
     context 'when the user is logged in' do
