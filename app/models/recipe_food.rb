@@ -5,6 +5,8 @@ class RecipeFood < ApplicationRecord
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   attr_accessor :quantity_needed, :cost_required
 
+  validates :recipe_id, presence: true
+  validates :food_id, presence: true
   def process_quantity(user_food)
     return @quantity_needed = quantity unless user_food
 
