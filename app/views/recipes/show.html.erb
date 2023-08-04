@@ -31,8 +31,9 @@
         <h5>Description: <%= @recipe.description %></h5>
       </div>
       <% if @recipe.user == current_user %>
-  <div class="d-flex  justify-content-center">
-    <%= link_to 'Add New Food', new_recipe_recipe_food_path(@recipe), class: "btn btn-sm btn-primary" %>
+  <div class="d-flex  justify-content-around my-3">
+    <button   class="btn btn-sm btn-primary" %>Generate shopping list</button>
+    <button class="btn btn-sm btn-primary" %>Add ingredient </button>
   </div>
   <% end %>
     </div>
