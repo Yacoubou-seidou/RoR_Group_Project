@@ -1,0 +1,4 @@
+const toggleButton = document.querySelector(".btn-toggle-public");
+if (toggleButton) {
+  toggleButton.textContent = "<%= @recipe.public? ? 'Make Private' : 'Make Public' %>";
+}

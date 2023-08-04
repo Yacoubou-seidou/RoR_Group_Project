@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+ <div class="card shadow d-flex justify-content-center" style="width: 50rem;">
+  <div class="card-header">
+      <h2 class="card-title text-center">Recipe details</h2>
+ </div>
+    <div class="card-body d-flex flex-column align-items-stretch dark-card">
+      <div >
+    <h4>Recipe: <%= @recipe.name %>
+    </h4>
+    <div class="recipe-container">
+      <div>
+        <h4 class="d-flex justify-content-between">Preparation Time: <%= @recipe.preparation_time %>
+        <div>
+          <% if @recipe.user == current_user %>
+        <div>
+          <%= form_with(model: @recipe, url: toggle_public_user_recipe_path(@recipe), method: :patch, remote: true, html: { class: "d-inline" }) do |f| %>
+            <%= f.submit @recipe.public? ? "Make Private" : "Make Public", class: "btn btn-sm btn-success", data: { toggle: "tooltip", placement: "bottom" } %>
+          <% end %>
+        </div>
+      <% end %>
+        <% if @recipe.public %>
+          <span class="badge text-red bg-warning p-2 my-4">Public</span>
+          <% else %>
+            <span class="badge text-red bg-secondary p-2 my-4">Private</span>
+            <% end %>
+      </div>
+        </h4>
+        <h4>Cooking Time: <%= @recipe.cooking_time %>
+        </h4>
+        <br>
+        <h5>Description: <%= @recipe.description %></h5>
+      </div>
+      <% if @recipe.user == current_user %>
+  <div class="d-flex  justify-content-around my-3">
+    <button   class="btn btn-sm btn-primary" %>Generate shopping list</button>
+    <button class="btn btn-sm btn-primary" %>Add ingredient </button>
+  </div>
+  <% end %>
+    </div>
+</div>
+</div>
+  <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <%# <th scope="col">Measuremen Unit</th> %>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+       <% @recipe.recipe_foods.each do |recipe_food| %>
+  <tr>
+    <td class="text-white"><%= recipe_food.food.name.capitalize %></td>
+    <td><%= number_to_currency(recipe_food.food.price) %></td>
+    <td><%= recipe_food.quantity %></td>
+    <td>
+          <% if @recipe.user == current_user %>
+  <div class="d-flex  justify-content-center">
+      <%= button_to 'Delete', food_path(recipe_food.food), method: :delete, data: { confirm: 'Are you sure you want to delete this food item?' }, class: 'btn btn-danger btn-sm' %>
+  </div>
+  <% end %>
+
+    </td>
+  </tr>
+<% end %>
+
+      </tbody>
+    </table>
+
+
+    </div>
+  </div>

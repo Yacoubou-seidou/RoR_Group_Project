@@ -1,0 +1,37 @@
+<div class="col-lg-6 mx-lg-auto">
+  <div class="card shadow">
+    <div class="card-header">
+      <h2 class="card-title text-center">Create Food</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: @food, url: foods_path) do |f| %>
+
+        <div class="form-group mb-2">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="form-group mb-2">
+          <%= f.label :measurement_unit %>
+          <%= f.text_field :measurement_unit, placeholder: 'gram,Kgram,ltr', class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="form-group mb-2">
+          <%= f.label :price %>
+          <%= f.text_field :price, step: 0.01, placeholder: '2.00$', class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="form-group mb-2">
+          <%= f.label :quantity %>
+          <%= f.text_field :quantity, placeholder: '1', class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="actions text-center m-4">
+          <%= f.submit "Created Food", class: "btn btn-lg btn-primary" %>
+        </div>
+      <% end %>
+
+
+    </div>
+  </div>
+</div>
